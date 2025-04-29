@@ -46,7 +46,16 @@ export function calculateItemNutrition(entry: FoodEntry): {
   }
   
   const grams = convertToGrams(entry.quantity, entry.unit, foodItem);
-  const ratio = grams / 100; // Most nutrition data is per 100g
+  
+  // For supplements with non-gram serving units (like tablets), use a different calculation
+  let ratio: number;
+  if (foodItem.servingUnit !== 'g') {
+    // For supplements, calculate based on number of servings rather than grams
+    ratio = entry.quantity / 1; // 1 serving = 1 tablet/pill/etc.
+  } else {
+    // For regular food items, calculate based on grams
+    ratio = grams / 100; // Most nutrition data is per 100g
+  }
   
   const micronutrients: {[key: string]: {amount: number; unit: string; percentDailyValue: number}} = {};
   
@@ -69,8 +78,8 @@ export function calculateItemNutrition(entry: FoodEntry): {
       fiber: foodItem.fiber * ratio,
       sugar: foodItem.sugar * ratio,
       micronutrients,
-      cost: foodItem.costPerUnit * grams,
-      servings: grams / foodItem.servingSize
+      cost: foodItem.costPerUnit * entry.quantity, // Use quantity directly for supplements
+      servings: entry.quantity // Use quantity directly for supplements
     }
   };
 }

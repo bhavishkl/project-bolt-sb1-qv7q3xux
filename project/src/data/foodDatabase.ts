@@ -148,5 +148,37 @@ export const foodDatabase: FoodItem[] = [
     costPerUnit: 1.20, // ₹1.20 per gram (approx. ₹1200 per 1kg)
     servingSize: 36,
     servingUnit: 'g',
-  }  
+  },
+  {
+    id: '7',
+    name: 'Limcee Vitamin C Supplement',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      vitaminC: { amount: 500, unit: 'mg', dailyValue: 556 } // 500mg is 556% of daily value (90mg)
+    },
+    costPerUnit: 1.6, // ₹24 for 15 tablets = ₹1.6 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet',
+  },
+  {
+    id: '8',
+    name: 'NOW Food Iron 18mg',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      iron: { amount: 18, unit: 'mg', dailyValue: 100 } // 18mg is 100% of daily value (18mg)
+    },
+    costPerUnit: 6.54, // ₹785 for 120 tablets = ₹6.54 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet',
+  }
 ];
