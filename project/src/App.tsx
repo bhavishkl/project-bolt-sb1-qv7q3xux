@@ -43,6 +43,12 @@ function App() {
     setFoodEntries(foodEntries.filter((_, i) => i !== index));
   };
   
+  const handleUpdateFoodItem = (index: number, updatedEntry: FoodEntry) => {
+    const newEntries = [...foodEntries];
+    newEntries[index] = updatedEntry;
+    setFoodEntries(newEntries);
+  };
+  
   const nutritionTotals = calculateTotalNutrition(foodEntries);
   
   return (
@@ -53,7 +59,8 @@ function App() {
         <FoodItemInput onAddFoodItem={handleAddFoodItem} />
         <FoodItemList 
           foodEntries={foodEntries} 
-          onRemoveFoodItem={handleRemoveFoodItem} 
+          onRemoveFoodItem={handleRemoveFoodItem}
+          onUpdateFoodItem={handleUpdateFoodItem}
         />
         <NutritionSummary nutritionTotals={nutritionTotals} />
         

@@ -1,15 +1,23 @@
-import React from 'react';
-import { Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Trash2, Edit2 } from 'lucide-react';
 import { FoodEntry } from '../types';
 import { foodDatabase } from '../data/foodDatabase';
 import { calculateItemNutrition, formatCurrency, formatNumber } from '../utils/nutritionCalculator';
+import FoodItemEdit from './FoodItemEdit';
 
 interface FoodItemListProps {
   foodEntries: FoodEntry[];
   onRemoveFoodItem: (index: number) => void;
+  onUpdateFoodItem: (index: number, updatedEntry: FoodEntry) => void;
 }
 
-const FoodItemList: React.FC<FoodItemListProps> = ({ foodEntries, onRemoveFoodItem }) => {
+const FoodItemList: React.FC<FoodItemListProps> = ({ 
+  foodEntries, 
+  onRemoveFoodItem,
+  onUpdateFoodItem
+}) => {
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  
   if (foodEntries.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-md p-5 mb-6">
@@ -21,6 +29,19 @@ const FoodItemList: React.FC<FoodItemListProps> = ({ foodEntries, onRemoveFoodIt
       </div>
     );
   }
+
+  const handleEdit = (index: number) => {
+    setEditingIndex(index);
+  };
+  
+  const handleSaveEdit = (index: number, updatedEntry: FoodEntry) => {
+    onUpdateFoodItem(index, updatedEntry);
+    setEditingIndex(null);
+  };
+  
+  const handleCancelEdit = () => {
+    setEditingIndex(null);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md p-5 mb-6 animate-fade-in">
@@ -54,7 +75,24 @@ const FoodItemList: React.FC<FoodItemListProps> = ({ foodEntries, onRemoveFoodIt
                     <div className="text-xs text-gray-500">{formatNumber(grams)}g total</div>
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
-                    {entry.quantity} {entry.unit}
+                    {editingIndex === index ? (
+                      <FoodItemEdit 
+                        entry={entry}
+                        onSave={(updatedEntry) => handleSaveEdit(index, updatedEntry)}
+                        onCancel={handleCancelEdit}
+                      />
+                    ) : (
+                      <div className="flex items-center">
+                        <span>{entry.quantity} {entry.unit}</span>
+                        <button
+                          onClick={() => handleEdit(index)}
+                          className="ml-2 text-blue-500 hover:text-blue-700 transition-colors"
+                          title="Edit quantity"
+                        >
+                          <Edit2 size={16} />
+                        </button>
+                      </div>
+                    )}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     {formatNumber(nutrition.calories)} cal

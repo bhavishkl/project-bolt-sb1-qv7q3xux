@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, AlertTriangle, Printer } from 'lucide-react';
+import { ChevronDown, ChevronUp, AlertTriangle, Printer, Info } from 'lucide-react';
 import { NutritionTotals } from '../types';
 import { formatCurrency, formatNumber, generateDietaryWarnings } from '../utils/nutritionCalculator';
 
@@ -32,6 +32,19 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
         ></div>
       </div>
     );
+  };
+  
+  // Helper to determine RDA status and color for micronutrients
+  const getMicronutrientStatus = (percentDailyValue: number): { status: string; color: string; bgColor: string } => {
+    if (percentDailyValue < 50) {
+      return { status: 'Low', color: 'text-red-600', bgColor: 'bg-red-100' };
+    } else if (percentDailyValue >= 50 && percentDailyValue <= 150) {
+      return { status: 'Good', color: 'text-green-600', bgColor: 'bg-green-100' };
+    } else if (percentDailyValue > 150 && percentDailyValue <= 200) {
+      return { status: 'High', color: 'text-yellow-600', bgColor: 'bg-yellow-100' };
+    } else {
+      return { status: 'Excess', color: 'text-red-600', bgColor: 'bg-red-100' };
+    }
   };
   
   const handlePrint = () => {
@@ -214,24 +227,37 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
             
             {micronutrientsExpanded && (
               <div className="bg-gray-50 p-4 rounded-md animate-fade-in">
+                <div className="mb-3 flex items-center text-xs text-gray-500">
+                  <Info size={14} className="mr-1" />
+                  <span>Color indicators show RDA meeting status: <span className="text-red-600">Low</span> | <span className="text-green-600">Good</span> | <span className="text-yellow-600">High</span> | <span className="text-red-600">Excess</span></span>
+                </div>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-200">
                       <th className="py-2 text-left text-gray-600 font-medium">Nutrient</th>
                       <th className="py-2 text-right text-gray-600 font-medium">Amount</th>
                       <th className="py-2 text-right text-gray-600 font-medium">% Daily Value</th>
+                      <th className="py-2 text-center text-gray-600 font-medium">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(nutritionTotals.micronutrients).map(([key, value]) => (
-                      <tr key={key} className="border-b border-gray-200">
-                        <td className="py-2 text-gray-600 capitalize">{key}</td>
-                        <td className="py-2 text-right">{formatNumber(value.amount)} {value.unit}</td>
-                        <td className="py-2 text-right">
-                          {formatNumber(value.percentDailyValue)}%
-                        </td>
-                      </tr>
-                    ))}
+                    {Object.entries(nutritionTotals.micronutrients).map(([key, value]) => {
+                      const { status, color, bgColor } = getMicronutrientStatus(value.percentDailyValue);
+                      return (
+                        <tr key={key} className="border-b border-gray-200">
+                          <td className="py-2 text-gray-600 capitalize">{key}</td>
+                          <td className="py-2 text-right">{formatNumber(value.amount)} {value.unit}</td>
+                          <td className="py-2 text-right">
+                            {formatNumber(value.percentDailyValue)}%
+                          </td>
+                          <td className="py-2 text-center">
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${bgColor} ${color}`}>
+                              {status}
+                            </span>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -256,7 +282,6 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
           </div>
         </div>
       )}
-      
     </div>
   );
 };

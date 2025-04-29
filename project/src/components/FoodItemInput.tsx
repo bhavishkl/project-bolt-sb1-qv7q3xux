@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, Plus } from 'lucide-react';
 import { foodDatabase } from '../data/foodDatabase';
 import { FoodEntry } from '../types';
@@ -13,6 +13,9 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
   const [quantity, setQuantity] = useState<number>(100);
   const [unit, setUnit] = useState<string>('g');
   const [isSearching, setIsSearching] = useState(false);
+  
+  const quantityInputRef = useRef<HTMLInputElement>(null);
+  const unitSelectRef = useRef<HTMLSelectElement>(null);
   
   const filteredFoodItems = searchTerm.length > 1
     ? foodDatabase.filter(item => 
@@ -42,6 +45,13 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
       setSearchTerm(food.name);
       setUnit(food.servingUnit);
       setIsSearching(false);
+      
+      // Focus on quantity input after selecting a food item
+      setTimeout(() => {
+        if (quantityInputRef.current) {
+          quantityInputRef.current.focus();
+        }
+      }, 100);
     }
   };
   
@@ -58,6 +68,21 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
       setSelectedFoodId('');
       setQuantity(100);
       setUnit('g');
+      
+      // Focus back on search input
+      setTimeout(() => {
+        const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }, 100);
+    }
+  };
+  
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddFoodItem();
     }
   };
   
@@ -97,6 +122,7 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
               }}
               onFocus={handleSearchFocus}
               onBlur={handleSearchBlur}
+              onKeyDown={handleKeyDown}
               placeholder="Search for a food item..."
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
             />
@@ -134,9 +160,11 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
             Quantity
           </label>
           <input
+            ref={quantityInputRef}
             type="number"
             value={quantity}
             onChange={(e) => setQuantity(Math.max(0, Number(e.target.value)))}
+            onKeyDown={handleKeyDown}
             min="0"
             step="1"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
@@ -149,8 +177,10 @@ const FoodItemInput: React.FC<FoodItemInputProps> = ({ onAddFoodItem }) => {
             Unit
           </label>
           <select
+            ref={unitSelectRef}
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
           >
             {getAvailableUnits().map(unitOption => (

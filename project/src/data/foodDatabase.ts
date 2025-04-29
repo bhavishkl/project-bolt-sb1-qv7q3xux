@@ -106,5 +106,47 @@ export const foodDatabase: FoodItem[] = [
     costPerUnit: 0.20, // ₹0.20 per gram (approx. ₹20 per 100g)
     servingSize: 100,
     servingUnit: 'g',
-  }
+  },
+  {
+    id: '5',
+    name: 'NATURALTEIN Whey Protein Concentrate (Unflavoured)',
+    calories: 350,
+    protein: 80,
+    carbs: 4,
+    fat: 7.3,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      sodium: { amount: 167, unit: 'mg', dailyValue: 7 },
+      calcium: { amount: 400, unit: 'mg', dailyValue: 40 },
+      potassium: { amount: 500, unit: 'mg', dailyValue: 14 },
+      iron: { amount: 0.7, unit: 'mg', dailyValue: 3 },
+      magnesium: { amount: 67, unit: 'mg', dailyValue: 17 },
+      phosphorus: { amount: 333, unit: 'mg', dailyValue: 27 }
+    },
+    costPerUnit: 1.8, // ₹0.65 per gram (approx. ₹1950 per 3kg)
+    servingSize: 30,
+    servingUnit: 'g',
+  },
+  {
+    id: '6',
+    name: 'NAKPRO Vegan Plant Protein Powder (Pea & Brown Rice)',
+    calories: 333,
+    protein: 70,
+    carbs: 4.2,
+    fat: 2.8,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      sodium: { amount: 556, unit: 'mg', dailyValue: 25 },
+      calcium: { amount: 111, unit: 'mg', dailyValue: 11 },
+      iron: { amount: 13.9, unit: 'mg', dailyValue: 77 },
+      potassium: { amount: 278, unit: 'mg', dailyValue: 8 },
+      magnesium: { amount: 83, unit: 'mg', dailyValue: 22 },
+      phosphorus: { amount: 222, unit: 'mg', dailyValue: 18 }
+    },
+    costPerUnit: 1.20, // ₹1.20 per gram (approx. ₹1200 per 1kg)
+    servingSize: 36,
+    servingUnit: 'g',
+  }  
 ];
