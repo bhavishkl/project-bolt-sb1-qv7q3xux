@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trash2, Edit2 } from 'lucide-react';
+import { Trash2, Edit2, Utensils, Scale, Flame, Beef, Wheat, Droplet, IndianRupee, DollarSign, List } from 'lucide-react';
 import { FoodEntry } from '../types';
 import { foodDatabase } from '../data/foodDatabase';
 import { calculateItemNutrition, formatCurrency, formatNumber } from '../utils/nutritionCalculator';
@@ -21,7 +21,10 @@ const FoodItemList: React.FC<FoodItemListProps> = ({
   if (foodEntries.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-md p-5 mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Food Items</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+          <List className="mr-2" size={20} />
+          Food Items
+        </h2>
         <div className="p-8 text-center text-gray-500">
           <p className="mb-2">No food items added yet</p>
           <p className="text-sm">Search and add food items to see their nutritional breakdown</p>
@@ -45,19 +48,63 @@ const FoodItemList: React.FC<FoodItemListProps> = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md p-5 mb-6 animate-fade-in">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Food Items</h2>
+      <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <List className="mr-2" size={20} />
+        Food Items
+      </h2>
       
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food Item</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Calories</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Protein</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Carbs</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fat</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cost</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Utensils className="mr-1" size={14} />
+                  Food Item
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Scale className="mr-1" size={14} />
+                  Quantity
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Flame className="mr-1" size={14} />
+                  Calories
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Beef className="mr-1" size={14} />
+                  Protein
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Wheat className="mr-1" size={14} />
+                  Carbs
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <Droplet className="mr-1" size={14} />
+                  Fat
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <IndianRupee className="mr-1" size={14} />
+                  Cost
+                </div>
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div className="flex items-center">
+                  <DollarSign className="mr-1" size={14} />
+                  Cost/Protein
+                </div>
+              </th>
               <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
@@ -108,6 +155,9 @@ const FoodItemList: React.FC<FoodItemListProps> = ({
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     {formatCurrency(nutrition.cost)}
+                  </td>
+                  <td className="px-4 py-3 whitespace-nowrap">
+                    {nutrition.protein > 0 ? formatCurrency(nutrition.cost / nutrition.protein) : 'N/A'}
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap text-right">
                     <button

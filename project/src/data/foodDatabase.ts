@@ -180,5 +180,73 @@ export const foodDatabase: FoodItem[] = [
     costPerUnit: 6.54, // ₹785 for 120 tablets = ₹6.54 per tablet
     servingSize: 1,
     servingUnit: 'tablet',
+  },
+  {
+    id: '9',
+    name: 'Carbamide Forte Vitamin D3 + K2 (MK-7)',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      vitaminK2: { amount: 55, unit: 'mcg', dailyValue: 100 }, // 55 mcg = 100% RDA
+      vitaminD: { amount: 600, unit: 'IU', dailyValue: 100 }  // 600 IU = 100% RDA
+    },
+    costPerUnit: 4.16, // ₹499 for 120 tablets
+    servingSize: 1,
+    servingUnit: 'tablet',
+  }  ,
+  {
+    id: '10',
+    name: 'Boldfit Vitamin D3 + K2 + B12',
+    calories: 0.08,
+    protein: 0,
+    carbs: 0.02,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      vitaminK2: { amount: 55, unit: 'mcg', dailyValue: 100 },
+      vitaminD: { amount: 600, unit: 'IU', dailyValue: 100 },
+      vitaminB12: { amount: 2.2, unit: 'mcg', dailyValue: 100 },
+       },
+    costPerUnit: 2.49, // ₹299 for 120 tablets = ₹2.49 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet',
+  }, 
+  {
+    id: '11',
+    name: 'CF Chelated Magnesium Glycinate',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      magnesium: { amount: 220, unit: 'mg', dailyValue: 50 }
+    },
+    costPerUnit: 6.13, // ₹735 for 120 tablets = ₹6.13 per 2-tablet serving or ₹3.06 per tablet
+    servingSize: 2,
+    servingUnit: 'tablets'
+  }, {
+    id: '12',
+    name: 'Swanson Zinc Picolinate',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      zinc: { amount: 22, unit: 'mg', dailyValue: 200 }
+    },
+    costPerUnit: 5.89, // ₹353.29 for 60 capsules = ₹5.89 per capsule
+    servingSize: 1,
+    servingUnit: 'capsule'
   }
+  
+  
 ];

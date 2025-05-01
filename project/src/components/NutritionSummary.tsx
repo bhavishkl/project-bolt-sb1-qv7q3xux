@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, AlertTriangle, Printer, Info } from 'lucide-react';
+import { ChevronDown, ChevronUp, AlertTriangle, Printer, Info, PieChart, Calculator, Droplet, Beef, Wheat, Flame, IndianRupee, Scale } from 'lucide-react';
 import { NutritionTotals } from '../types';
 import { formatCurrency, formatNumber, generateDietaryWarnings } from '../utils/nutritionCalculator';
 
@@ -66,7 +66,10 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
   return (
     <div className="bg-white rounded-lg shadow-md p-5 mb-6 print:shadow-none animate-fade-in">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-gray-800">Nutrition Summary</h2>
+        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+          <PieChart className="mr-2" size={20} />
+          Nutrition Summary
+        </h2>
         <div className="flex space-x-2">
           <button 
             onClick={handlePrint}
@@ -82,7 +85,10 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
         {/* Left Column - Overall Summary */}
         <div>
           <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-3">Overall Summary</h3>
+            <h3 className="font-medium text-gray-800 mb-3 flex items-center">
+              <Calculator className="mr-2" size={18} />
+              Overall Summary
+            </h3>
             <div className="bg-gray-50 p-4 rounded-md">
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -111,7 +117,10 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
           
           {/* Macro Breakdown */}
           <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-3">Macronutrient Breakdown</h3>
+            <h3 className="font-medium text-gray-800 mb-3 flex items-center">
+              <PieChart className="mr-2" size={18} />
+              Macronutrient Breakdown
+            </h3>
             <div className="bg-gray-50 p-4 rounded-md">
               {/* Protein */}
               <div className="mb-4">
@@ -178,7 +187,10 @@ const NutritionSummary: React.FC<NutritionSummaryProps> = ({ nutritionTotals }) 
         <div>
           {/* Detailed Macros */}
           <div className="mb-6">
-            <h3 className="font-medium text-gray-800 mb-3">Detailed Nutrients</h3>
+            <h3 className="font-medium text-gray-800 mb-3 flex items-center">
+              <Scale className="mr-2" size={18} />
+              Detailed Nutrients
+            </h3>
             <div className="bg-gray-50 p-4 rounded-md">
               <table className="w-full text-sm">
                 <tbody>
