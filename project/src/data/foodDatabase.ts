@@ -194,7 +194,7 @@ export const foodDatabase: FoodItem[] = [
       vitaminK2: { amount: 55, unit: 'mcg', dailyValue: 100 }, // 55 mcg = 100% RDA
       vitaminD: { amount: 600, unit: 'IU', dailyValue: 100 }  // 600 IU = 100% RDA
     },
-    costPerUnit: 4.16, // ₹499 for 120 tablets
+    costPerUnit: 3.94, // ₹499 for 120 tablets
     servingSize: 1,
     servingUnit: 'tablet',
   }  ,
@@ -228,9 +228,9 @@ export const foodDatabase: FoodItem[] = [
     micronutrients: {
       magnesium: { amount: 220, unit: 'mg', dailyValue: 50 }
     },
-    costPerUnit: 6.13, // ₹735 for 120 tablets = ₹6.13 per 2-tablet serving or ₹3.06 per tablet
-    servingSize: 2,
-    servingUnit: 'tablets'
+    costPerUnit: 5.9, // ₹735 for 120 tablets = ₹6.13 per 2-tablet serving or ₹3.06 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet'
   }, {
     id: '12',
     name: 'Swanson Zinc Picolinate',
@@ -246,6 +246,37 @@ export const foodDatabase: FoodItem[] = [
     costPerUnit: 5.89, // ₹353.29 for 60 capsules = ₹5.89 per capsule
     servingSize: 1,
     servingUnit: 'capsule'
+  }, {
+    id: '13',
+    name: 'Ambrosial Iron Bisglycinate 14mg',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      iron: { amount: 14, unit: 'mg', dailyValue: 70 } // DV% not mentioned
+    },
+    costPerUnit: 5.38, // ₹645 for 120 tablets = ₹5.38 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet'
+  },
+  {
+    id: '14',
+    name: 'Ambrosial Zinc Picolinate 30mg',
+    calories: 0,
+    protein: 0,
+    carbs: 0,
+    fat: 0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      zinc: { amount: 30, unit: 'mg', dailyValue: 300 }
+    },
+    costPerUnit: 6.37, // ₹764 for 120 tablets = ₹6.37 per tablet
+    servingSize: 1,
+    servingUnit: 'tablet'
   }
   
   
