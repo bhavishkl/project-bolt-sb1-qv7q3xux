@@ -43,7 +43,6 @@ export const foodDatabase: FoodItem[] = [
     sugar: 52,
     micronutrients: {
       calcium: { amount: 1250, unit: 'mg', dailyValue: 125 },
-      vitaminD: { amount: 3, unit: 'IU', dailyValue: 0 },
       vitaminA: { amount: 100, unit: 'IU', dailyValue: 2 },
       phosphorus: { amount: 950, unit: 'mg', dailyValue: 76 },
       potassium: { amount: 1700, unit: 'mg', dailyValue: 48 },
@@ -277,7 +276,26 @@ export const foodDatabase: FoodItem[] = [
     costPerUnit: 6.37, // ₹764 for 120 tablets = ₹6.37 per tablet
     servingSize: 1,
     servingUnit: 'tablet'
+  },
+  {
+    id: '15',
+    name: 'NAKPRO Vegan Soy Protein Isolate (Chocolate)',
+    calories: 357.6,
+    protein: 81.8,
+    carbs: 4.5,
+    fat: 3.0,
+    fiber: 0,
+    sugar: 0,
+    micronutrients: {
+      sodium: { amount: 400, unit: 'mg', dailyValue: 0 }, // %DV not provided
+      calcium: { amount: 0, unit: 'mg', dailyValue: 0 }, // not listed
+      iron: { amount: 0, unit: 'mg', dailyValue: 0 }, // not listed
+      potassium: { amount: 0, unit: 'mg', dailyValue: 0 }, // not listed
+      magnesium: { amount: 0, unit: 'mg', dailyValue: 0 }, // not listed
+      phosphorus: { amount: 0, unit: 'mg', dailyValue: 0 } // not listed
+    },
+    costPerUnit: 0.85, // ₹849 per 1000g = ₹0.85 per gram
+    servingSize: 33,
+    servingUnit: 'g',
   }
-  
-  
 ];
